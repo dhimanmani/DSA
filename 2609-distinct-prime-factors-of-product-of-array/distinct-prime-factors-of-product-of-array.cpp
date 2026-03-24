@@ -8,19 +8,15 @@ public:
         return true;
     }
     int distinctPrimeFactors(vector<int>& nums) {
-        unordered_map<int, int>freq;
+        unordered_set<int>freq;
         int n=nums.size();
         for(int i=0; i<n; i++){
             for(int j=2; j<=nums[i]; j++){
                 if(isprime(j) && (nums[i]%j)==0){
-                    freq[j]++;
+                    freq.insert(j);
                 }
             }
         }
-        int count=0;
-        for(auto it: freq){
-            if(it.first) count++;
-        }
-        return count;
+        return freq.size();
     }
 };
