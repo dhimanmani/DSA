@@ -13,12 +13,9 @@ public:
                 count++;
                 i++, j--;
             }
-            else if(people[i]+people[j]>=limit){
+            else{
                 count++;
                 j--;
-            }
-            else{
-                i++;
             }
         }
         return count;
