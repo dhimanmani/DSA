@@ -2,19 +2,20 @@ class Solution {
 public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
         int n= gas.size();
-        int start= n-1;
-        int end= n-1;
-        int station=0, gascost=0;
-        while(station<n){
-            gascost+= gas[end]- cost[end];
-            station+=1;
-            end = (end + 1) % n;
-            while (gascost < 0 && station < n) {
-                start--;
-                gascost += gas[start] - cost[start];
-                station++;
+        int currgas=0, start=0;
+        for(int i=0; i<n; i++){
+            currgas= currgas+gas[i]-cost[i];
+            if(currgas<0){
+                start=i+1;
+                currgas=0;
             }
         }
-        return gascost<0 ? -1: start;
+        currgas=0;
+        for(int i=0; i<n; i++){
+            int idx= (start+i)%n;
+            currgas= currgas+ gas[idx]- cost[idx];
+            if(currgas<0) return -1;
+        }
+        return start;
     }
 };
