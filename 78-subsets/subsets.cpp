@@ -1,20 +1,19 @@
 class Solution {
 public:
-    void generatesubsets(int i, vector<vector<int>>& res, vector<int>& nums, vector<int>&currsub){
-        if(i==nums.size()){
-            res.push_back(currsub);
-            return;
+    void solve(int index, vector<int>& nums,vector<int>&current,vector<vector<int>> &ans){
+        if(index==nums.size()){
+            ans.push_back(current);
+            return ;
         }
-        generatesubsets(i+1, res, nums, currsub);
-        currsub.push_back(nums[i]);
-        generatesubsets(i+1, res, nums, currsub);
-        currsub.pop_back();
+        current.push_back(nums[index]);
+        solve(index+1,nums,current,ans);
+        current.pop_back();
+        solve(index+1,nums,current,ans);
     }
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>>res;
-        int n= nums.size();
-        vector<int>currsub;
-        generatesubsets(0, res, nums, currsub);
-        return res;
+        vector<vector<int>> ans;
+        vector<int>current;
+        solve(0,nums,current,ans);
+        return ans;
     }
 };
